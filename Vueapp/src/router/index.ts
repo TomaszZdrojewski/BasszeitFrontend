@@ -11,6 +11,7 @@ const router = createRouter({
       name: 'home',
       component: Homepage,
     },
+    
     {
       path: '/songs',
       name: 'songs',
