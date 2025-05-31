@@ -1,12 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Songs from "@/components/songs/Songs.vue";
+import Songs from "../components/songs/Songs.vue";
 import Homepage from '@/components/Homepage.vue';
 import Ranking from "@/components/ranking/Ranking.vue";
-
+import GET from "../components/songs/GET.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/',
+      name: 'GET',
+      component: GET,
+    },
     {
       path: '/',
       name: 'home',

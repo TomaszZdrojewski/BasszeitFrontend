@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/Homepage.vue'
+import GET from "./components/songs/GET.vue"
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import HelloWorld from './components/Homepage.vue'
         <RouterLink to="/songs">Homepage</RouterLink>
         <RouterLink to="/">BestOf</RouterLink>
         <RouterLink to="/about">About US</RouterLink>
+        <RouterLink to="/GET">GET</RouterLink>
       </nav>
     </div>
   </header>
