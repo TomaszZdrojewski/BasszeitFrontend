@@ -13,7 +13,7 @@ import GET from "./components/songs/GET.vue"
 
       <nav>
         <RouterLink to="/songs">Homepage</RouterLink>
-        <RouterLink to="/">BestOf</RouterLink>
+        <RouterLink to="/ranking">BestOf</RouterLink>
         <RouterLink to="/about">About US</RouterLink>
         <RouterLink to="/GET">GET</RouterLink>
       </nav>
