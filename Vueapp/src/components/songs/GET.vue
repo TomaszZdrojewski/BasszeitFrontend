@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-// Define a reactive array to hold the fetched items
+// Reactive array to hold fetched items
 const items = ref<any[]>([])
 
-// Function to fetch data from the backend
 const loadThings = () => {
-  const endpoint = 'http://localhost:8080'
+  const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
+  console.log('Backend URL:', baseURL)
+
+  const endpoint = baseURL + '/music'
+
+
   const requestOptions: RequestInit = {
     method: 'GET',
     redirect: 'follow'
@@ -15,14 +19,14 @@ const loadThings = () => {
   fetch(endpoint, requestOptions)
     .then(response => response.json())
     .then(result => {
-      result.forEach((thing: any) => {
-        items.value.push(thing)
-      })
+      items.value = result
     })
-    .catch(error => console.log('error', error))
+    .catch(error => console.log('Fetch error:', error))
 }
 
-// Call the function when the component is mounted
+
+
+
 onMounted(() => {
   loadThings()
 })
@@ -30,10 +34,12 @@ onMounted(() => {
 
 <template>
   <div>
-    <h2>Things List</h2>
+    <h2>Musiclist from backend</h2>
     <ul>
       <li v-for="(item, index) in items" :key="index">
-        {{ item }}
+        <strong>ID:</strong> {{ item.id }} |
+        <strong>Title:</strong> {{ item.title }} |
+        <strong>Artist:</strong> {{ item.artist }}
       </li>
     </ul>
   </div>
@@ -46,5 +52,8 @@ h2 {
 }
 ul {
   padding-left: 1.2rem;
+}
+li {
+  margin-bottom: 0.4rem;
 }
 </style>
