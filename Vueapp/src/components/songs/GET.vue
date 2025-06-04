@@ -6,9 +6,9 @@ const items = ref<any[]>([])
 
 const loadThings = () => {
   const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
+  const endpoint = baseURL + '/music'
   console.log('Backend URL:', baseURL)
 
-  const endpoint = baseURL + '/music'
 
 
   const requestOptions: RequestInit = {
