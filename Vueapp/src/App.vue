@@ -15,7 +15,8 @@ import GET from "./components/songs/GET.vue"
         <RouterLink to="/songs">Homepage</RouterLink>
         <RouterLink to="/ranking">BestOf</RouterLink>
         <RouterLink to="/about">About US</RouterLink>
-        <RouterLink to="/GET">GET</RouterLink>
+        <RouterLink to="/get">GET</RouterLink>
+        <RouterLink to="/post">POST</RouterLink>
       </nav>
     </div>
   </header>
