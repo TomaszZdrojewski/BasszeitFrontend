@@ -15,9 +15,10 @@ const save = () => {
   const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
   const endpoint = baseURL + '/repo'
   const data = {
-    title: "title",
-
+    title: titleField.value,
+    artist: artistField.value,
   };
+
 
   const requestOptions = {
     method: 'POST',
