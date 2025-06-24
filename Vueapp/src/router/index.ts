@@ -9,12 +9,12 @@ const router = createRouter({
   routes: [
     {
       path: '/POST',
-      name: 'POST',
+      name: 'post',
       component: POST,
     },
     {
       path: '/GET',
-      name: 'GET',
+      name: 'get',
       component: GET,
     },
     {
