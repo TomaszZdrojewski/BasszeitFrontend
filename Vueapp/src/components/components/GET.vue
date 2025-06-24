@@ -1,3 +1,37 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
+// Reactive array to hold fetched items
+const items = ref<any[]>([])
+
+const loadThings = () => {
+  const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
+  const endpoint = baseURL + '/music'
+  console.log('Backend URL:', baseURL)
+
+
+
+  const requestOptions: RequestInit = {
+    method: 'GET',
+    redirect: 'follow'
+  }
+
+  fetch(endpoint, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      items.value = result
+    })
+    .catch(error => console.log('Fetch error:', error))
+}
+
+
+
+
+onMounted(() => {
+  loadThings()
+})
+</script>
+
 <template>
   <div class="music-container">
     <h2>🎵 Music List from Backend</h2>
