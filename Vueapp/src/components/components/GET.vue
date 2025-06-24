@@ -33,7 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="music-container">
     <h2>Musiclist from backend</h2>
     <ul>
       <li v-for="(item, index) in items" :key="index">
@@ -46,6 +46,12 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.music-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 h2 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;

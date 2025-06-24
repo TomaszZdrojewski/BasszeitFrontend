@@ -2,19 +2,17 @@
   <div class="about">
     <h1>This is an about page</h1>
     <p>
-      This page is a part of the Vue 3 + Vite starter template.
-      It is designed to help you get started with your Vue.js project quickly.
-      You can customize this page to include information about your project, team, or anything else you find relevant.
+      This is About page for BasszeitFrontend.
+      It is a Vue.js application that serves as the frontend for the Basszeit project.
+      The application is designed to provide a user-friendly interface for interacting with the Basszeit backend services.
     </p>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<style scoped>
+.about {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
 }
 </style>

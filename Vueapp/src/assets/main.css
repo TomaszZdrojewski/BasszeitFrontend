@@ -1,5 +1,6 @@
 @import './base.css';
 
+/* General layout container */
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -7,6 +8,7 @@
   font-weight: normal;
 }
 
+/* Global link styles */
 a,
 .green {
   text-decoration: none;
@@ -21,15 +23,30 @@ a,
   }
 }
 
+/* Desktop layout (1024px and up) */
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
+    justify-content: center;
+    align-items: flex-start;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  body {
+    display: flex;
+    justify-content: center;
+  }
+
+
+
+  header {
+    grid-area: header;
+  }
+
+  main {
+    grid-area: main;
+  }
+
+  aside {
+    grid-area: sidebar;
   }
 }

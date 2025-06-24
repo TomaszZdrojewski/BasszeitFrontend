@@ -1,54 +1,69 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/Homepage.vue'
-import GET from "./components/songs/GET.vue"
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div id="app">
+    <header>
+      <div class="header-inner">
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+        <div class="wrapper">
+          <HelloWorld msg="You did it!" />
 
-      <nav>
-        <RouterLink to="/songs">Homepage</RouterLink>
-        <RouterLink to="/ranking">BestOf</RouterLink>
-        <RouterLink to="/about">About US</RouterLink>
-        <RouterLink to="/get">GET</RouterLink>
-        <RouterLink to="/post">POST</RouterLink>
-      </nav>
-    </div>
-  </header>
+          <nav>
+            <RouterLink to="/songs">Homepage</RouterLink>
+            <!--RouterLink to="/ranking">BestOf</RouterLink-->
+            <RouterLink to="/about">About US</RouterLink>
+            <RouterLink to="/get">GET</RouterLink>
+            <RouterLink to="/post">POST</RouterLink>
+          </nav>
+        </div>
+      </div>
+    </header>
 
-  <RouterView />
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
+/* Outer header is a grid item */
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  grid-area: header;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Inner header content wrapper */
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .logo {
   display: block;
-  margin: 0 auto 2rem;
+  margin: 0;
+}
+
+.wrapper {
+  flex: 1;
 }
 
 nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
 
 nav a {
   display: inline-block;
@@ -61,27 +76,9 @@ nav a:first-of-type {
 }
 
 @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
   nav {
     text-align: left;
-    margin-left: -1rem;
     font-size: 1rem;
-
     padding: 1rem 0;
     margin-top: 1rem;
   }
