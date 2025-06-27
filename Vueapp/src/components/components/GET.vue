@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 
+// Liczba głosów
+const votes = ref(0)
+
+// Funkcja zmieniająca głos
+function toggleVote() {
+  votes.value += 1
+}
+
+// Lista elementów i filtracja
 const items = ref<any[]>([])
 const searchQuery = ref('')
 
@@ -14,6 +23,7 @@ const filteredItems = computed(() =>
   })
 )
 
+// Ładowanie danych z backendu
 const loadThings = () => {
   const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
   const endpoint = baseURL + '/music'
@@ -26,11 +36,12 @@ const loadThings = () => {
     .catch(error => console.log('Fetch error:', error))
 }
 
+// Załaduj dane po zamontowaniu komponentu
 onMounted(() => {
   loadThings()
 })
-
 </script>
+
 
 <template>
   <div class="music-container">
