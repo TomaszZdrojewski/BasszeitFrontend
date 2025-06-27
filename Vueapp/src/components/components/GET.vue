@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 
-// Set ID elementów, które zostały zagłosowane
-const votes = ref<Set<number>>(new Set())
+// Jeden ID wybranego elementu (głos)
+const votedId = ref<number | null>(null)
 
 function toggleVote(id: number) {
-  if (votes.value.has(id)) {
-    votes.value.delete(id)
-  } else {
-    votes.value.add(id)
-  }
+  votedId.value = votedId.value === id ? null : id
 }
 
-// Lista elementów i filtracja
 const items = ref<any[]>([])
 const searchQuery = ref('')
 
@@ -71,12 +66,12 @@ onMounted(() => {
   </div>
 </template>
 
-
 <style scoped>
 .music-container {
   max-width: 700px;
   margin: 2rem auto;
   text-align: center;
+  color: #f0f0f0; /* Jasny tekst */
 }
 
 .music-list {
@@ -89,16 +84,17 @@ onMounted(() => {
 }
 
 .music-item {
-  background: #f9f9f9;
+  background: #1e1e1e; /* ciemne tło */
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s ease;
+  border: 1px solid hsla(160, 100%, 37%, 1); /* zielona ramka */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, border-color 0.3s ease;
 }
 
 .music-item:hover {
   transform: translateY(-2px);
+  border-color: #00ff88; /* jaśniejsza zieleń przy najechaniu */
 }
 
 .music-line {
@@ -107,7 +103,9 @@ onMounted(() => {
   flex-wrap: wrap;
   gap: 0.5rem;
   font-size: 0.95rem;
+  color: #ffffff; /* jasny tekst w elemencie */
 }
+
 .search-input {
   width: 100%;
   max-width: 400px;
@@ -117,6 +115,15 @@ onMounted(() => {
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  background-color: #2b2b2b;
+  color: #ffffff;
 }
 
+.vote-box {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: bold;
+  color: hsla(160, 100%, 37%, 1); /* zielony tekst "Vote" */
+}
 </style>
