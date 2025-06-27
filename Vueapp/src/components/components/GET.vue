@@ -6,6 +6,7 @@ const votedId = ref<number | null>(null)
 
 function toggleVote(id: number) {
   votedId.value = votedId.value === id ? null : id
+  localStorage.setItem('votedId', votedId.value?.toString() ?? '')
 }
 
 const items = ref<any[]>([])
@@ -35,6 +36,8 @@ const loadThings = () => {
 
 onMounted(() => {
   loadThings()
+  const saved = localStorage.getItem('votedId')
+  votedId.value = saved ? parseInt(saved) : null
 })
 </script>
 
