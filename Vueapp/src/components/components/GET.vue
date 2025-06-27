@@ -57,7 +57,7 @@ onMounted(() => {
           <span><strong>Title:</strong> {{ item.title || '—' }}</span>
           <span><strong>Artist:</strong> {{ item.artist || '—' }}</span>
           <label class="vote-box">
-            <input type="checkbox" :checked="votes.has(item.id)" @change="toggleVote(item.id)" />
+            <input type="checkbox" :checked="votedId === item.id" @change="toggleVote(item.id)" />
             Vote
           </label>
         </div>
