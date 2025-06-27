@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 
-// Liczba głosów
-const votes = ref(0)
+// Set ID elementów, które zostały zagłosowane
+const votes = ref<Set<number>>(new Set())
 
-// Funkcja zmieniająca głos
-function toggleVote() {
-  votes.value += 1
+function toggleVote(id: number) {
+  if (votes.value.has(id)) {
+    votes.value.delete(id)
+  } else {
+    votes.value.add(id)
+  }
 }
 
 // Lista elementów i filtracja
@@ -23,7 +26,6 @@ const filteredItems = computed(() =>
   })
 )
 
-// Ładowanie danych z backendu
 const loadThings = () => {
   const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
   const endpoint = baseURL + '/music'
@@ -36,7 +38,6 @@ const loadThings = () => {
     .catch(error => console.log('Fetch error:', error))
 }
 
-// Załaduj dane po zamontowaniu komponentu
 onMounted(() => {
   loadThings()
 })
