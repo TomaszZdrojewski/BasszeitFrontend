@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Songs from "@/components/components/Songs.vue";
+import TopSong from "@/components/components/TopSong.vue";
 import Homepage from '@/components/Homepage.vue';
 import Ranking from "@/components/ranking/Ranking.vue";
 import GET from "@/components/components/GET.vue";
@@ -30,7 +30,7 @@ const router = createRouter({
     {
       path: '/songs',
       name: 'songs',
-      component: Songs    },
+      component: TopSong    },
     {
       path: '/about',
       name: 'about',
