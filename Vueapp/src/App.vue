@@ -7,7 +7,7 @@ import HelloWorld from './components/Homepage.vue'
   <div id="app">
     <header>
       <div class="header-inner">
-        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+        <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="220" height="150" />
 
         <div class="wrapper">
           <HelloWorld msg="You did it!" />
@@ -16,8 +16,8 @@ import HelloWorld from './components/Homepage.vue'
             <RouterLink to="/songs">Homepage</RouterLink>
             <!--RouterLink to="/ranking">BestOf</RouterLink-->
             <RouterLink to="/about">About US</RouterLink>
-            <RouterLink to="/get">GET</RouterLink>
-            <RouterLink to="/post">POST</RouterLink>
+            <RouterLink to="/get">Music List</RouterLink>
+            <RouterLink to="/post">Save Music</RouterLink>
           </nav>
         </div>
       </div>
