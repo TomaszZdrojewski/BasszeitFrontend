@@ -1,41 +1,82 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { useMusicStore } from '@/stores/useMusicStore'
 
-// Jeden ID wybranego elementu (głos)
-const votedId = ref<number | null>(null)
-
-function toggleVote(id: number) {
-  votedId.value = votedId.value === id ? null : id
-  localStorage.setItem('votedId', votedId.value?.toString() ?? '')
-}
-
-const items = ref<any[]>([])
+const store = useMusicStore()
 const searchQuery = ref('')
 
 const filteredItems = computed(() =>
-  items.value.filter(item => {
+  store.musicItems.filter(item => {
     const q = searchQuery.value.toLowerCase()
     return (
-      (item.title && item.title.toLowerCase().startsWith(q)) ||
-      (item.artist && item.artist.toLowerCase().startsWith(q))
+      item.title?.toLowerCase().startsWith(q) ||
+      item.artist?.toLowerCase().startsWith(q)
     )
   })
 )
 
-const loadThings = () => {
-  const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
-  const endpoint = baseURL + '/music'
+// Jeden ID wybranego elementu (głos)
+const votedId = ref<number | null>(null)
 
-  fetch(endpoint)
-    .then(res => res.json())
-    .then(result => {
-      items.value = result
-    })
-    .catch(error => console.log('Fetch error:', error))
+function undoVote(){
+  localStorage.removeItem('votedId')
+  votedId.value = null
 }
 
+
+function toggleVote(id: number) {
+  const saved = localStorage.getItem('votedId')
+  if (saved === id.toString()) {
+    console.log("Już głosowałeś na ten utwór.")
+    return
+  }
+
+  // 🔔 Potwierdzenie
+  const confirmed = window.confirm("Czy na pewno chcesz oddać głos na ten utwór?")
+  if (!confirmed) return
+
+  // Wyślij głos na backend
+  fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/music/${id}/vote`, {
+    method: 'POST'
+  })
+    .then(() => {
+      votedId.value = id
+      localStorage.setItem('votedId', id.toString())
+      store.loadMusic()
+    })
+    .catch(err => console.error('Voting failed:', err))
+}
+
+
+
+const items = ref<any[]>([])
+// const searchQuery = ref('')
+
+// const filteredItems = computed(() =>
+//   items.value.filter(item => {
+//     const q = searchQuery.value.toLowerCase()
+//     return (
+//       (item.title && item.title.toLowerCase().startsWith(q)) ||
+//       (item.artist && item.artist.toLowerCase().startsWith(q))
+//     )
+//   })
+// )
+
+// const loadThings = () => {
+//   const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
+//   const endpoint = baseURL + '/music'
+//
+//   fetch(endpoint)
+//     .then(res => res.json())
+//     .then(result => {
+//       items.value = result
+//     })
+//     .catch(error => console.log('Fetch error:', error))
+// }
+
+
 onMounted(() => {
-  loadThings()
+  store.loadMusic()
   const saved = localStorage.getItem('votedId')
   votedId.value = saved ? parseInt(saved) : null
 })
@@ -43,6 +84,14 @@ onMounted(() => {
 
 
 <template>
+  <button
+    class="clear-button"
+    @click="undoVote"
+    v-if="votedId === null"
+  >
+    🔄 Reset My Vote
+  </button>
+
   <div class="music-container">
     <h2>🎵 Music List from Backend</h2>
 
@@ -56,14 +105,23 @@ onMounted(() => {
     <ul class="music-list">
       <li v-for="(item, index) in filteredItems" :key="index" class="music-item">
         <div class="music-line">
-          <span><strong>ID:</strong> {{ item.id }}</span>
           <span><strong>Title:</strong> {{ item.title || '—' }}</span>
           <span><strong>Artist:</strong> {{ item.artist || '—' }}</span>
-          <label class="vote-box">
-            <input type="checkbox" :checked="votedId === item.id" @change="toggleVote(item.id)" />
+          <span><strong>Votes:</strong> {{ item.votes }}</span>
+          <span>
+    <strong>Status:</strong>
+    <span v-if="votedId === item.id" style="color: #00ff88">My Vote ✔️</span>
+    <span v-else style="color: #999">Not voted</span>
+  </span>
+          <button
+            @click="toggleVote(item.id)"
+            :disabled="votedId !== null"
+            class="vote-button"
+          >
             Vote
-          </label>
+          </button>
         </div>
+
       </li>
     </ul>
   </div>
@@ -122,11 +180,4 @@ onMounted(() => {
   color: #ffffff;
 }
 
-.vote-box {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-weight: bold;
-  color: hsla(160, 100%, 37%, 1); /* zielony tekst "Vote" */
-}
 </style>
