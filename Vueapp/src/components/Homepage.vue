@@ -6,9 +6,9 @@ defineProps<{
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="green">Basszeit</h1>
     <h3>
-      You’ve successfully created a project
+      Welcome to my Music Project
     </h3>
   </div>
 </template>

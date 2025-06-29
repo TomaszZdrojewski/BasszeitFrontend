@@ -10,11 +10,10 @@ import HelloWorld from './components/Homepage.vue'
         <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="220" height="150" />
 
         <div class="wrapper">
-          <HelloWorld msg="You did it!" />
+          <HelloWorld msg="Welcome to Basszeit" />
 
           <nav>
             <RouterLink to="/songs">Homepage</RouterLink>
-            <!--RouterLink to="/ranking">BestOf</RouterLink-->
             <RouterLink to="/about">About US</RouterLink>
             <RouterLink to="/get">Music List</RouterLink>
             <RouterLink to="/post">Save Music</RouterLink>
@@ -38,7 +37,7 @@ header {
 
 /* Inner header content wrapper */
 .header-inner {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   width: 100%;
   display: flex;
