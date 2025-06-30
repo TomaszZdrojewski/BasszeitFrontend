@@ -12,7 +12,5 @@
     }
   ],
   "extends": "./tsconfig.app.json",
-  "compilerOptions": {
-    "types": ["vitest"]
-  }
+
 }
