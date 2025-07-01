@@ -4,8 +4,7 @@
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
-    "noEmit": false,
-    "outDir": "./dist",
+    "noEmit": true,
     "tsBuildInfoFile": "./.tsbuildinfo-app",
     "paths": {
       "@/*": ["./src/*"]
