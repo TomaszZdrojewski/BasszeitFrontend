@@ -11,12 +11,12 @@ onMounted(() => {
   store.loadMusic()
 })
 
-// Ranking — We sort the song desc
+// Ranking — sortujemy po liczbie głosów malejąco
 const rankedMusic = computed(() =>
   [...store.musicItems].sort((a, b) => b.votes - a.votes)
 )
 
-// Best SOng
+// Najlepszy utwór (z największą liczbą głosów)
 const topSong = computed(() =>
   rankedMusic.value.length > 0 ? rankedMusic.value[0] : null
 )
@@ -52,90 +52,53 @@ watch(topSong, async (song) => {
   }
 })
 </script>
+
 <template>
   <div class="ranking-container">
     <h1 class="green">{{ msg }}</h1>
+    <h3>You’ve successfully created a project</h3>
 
-    <div class="flex-wrapper">
-      <div v-if="topSongVideoId" class="video-player">
-        <iframe
-          width="100%"
-          height="315"
-          :src="embedUrl"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-        <p>
-          <a :href="`https://www.youtube.com/watch?v=${topSongVideoId}`" target="_blank" rel="noopener">
-            Open in YouTube 🔗
-          </a>
-        </p>
-      </div>
+    <div v-if="topSongVideoId" class="video-player">
+      <iframe
+        width="560"
+        height="315"
+        :src="embedUrl"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
 
-      <div class="ranking">
-        <h2>🏆 Music Ranking</h2>
-        <ol>
-          <li v-for="(item, index) in rankedMusic" :key="item.id">
-            <strong>#{{ index + 1 }}</strong> — {{ item.title }} by {{ item.artist }} ({{ item.votes }} votes)
-          </li>
-        </ol>
-      </div>
+      <p>
+        <a :href="`https://www.youtube.com/watch?v=${topSongVideoId}`" target="_blank" rel="noopener">
+          Open in YouTube 🔗
+        </a>
+      </p>
+    </div>
+
+    <div class="ranking">
+      <h2>🏆 Music Ranking</h2>
+      <ol>
+        <li v-for="(item, index) in rankedMusic" :key="item.id">
+          <strong>#{{ index + 1 }}</strong> — {{ item.title }} by {{ item.artist }} ({{ item.votes }} votes)
+        </li>
+      </ol>
     </div>
   </div>
 </template>
 
-
 <style scoped>
 .ranking-container {
-  max-width: 1000px;
+  max-width: 700px;
   margin: 2rem auto;
   text-align: center;
   color: #fff;
-  padding: 1rem;
 }
 
-/* Układ boczny */
-.flex-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-/* Okno YouTube */
 .video-player {
-  flex: 1 1 400px;
-  max-width: 500px;
+  margin-bottom: 2rem;
 }
 
-.video-player iframe {
-  width: 100%;
-  height: 315px;
-  border-radius: 8px;
-  border: none;
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
-}
-
-.video-player p {
-  margin-top: 0.5rem;
-}
-
-.video-player a {
-  color: #00ff88;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.video-player a:hover {
-  text-decoration: underline;
-}
-
-/* Ranking */
 .ranking {
-  flex: 1 1 300px;
-  max-width: 400px;
   background: #1e1e1e;
   padding: 1rem;
   border-radius: 8px;
@@ -155,19 +118,5 @@ ol {
 li {
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
-  color: #f0f0f0;
-}
-
-/* Responsywność dla małych ekranów */
-@media (max-width: 768px) {
-  .flex-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .video-player iframe {
-    height: 200px;
-  }
 }
 </style>
-

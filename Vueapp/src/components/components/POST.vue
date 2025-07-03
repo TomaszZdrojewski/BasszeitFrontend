@@ -74,64 +74,55 @@ const save = async () => {
   max-width: 600px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background: #ffffff;
+  background: #f9f9f9;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #222;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   margin-bottom: 1.2rem;
-  color: #111;
 }
 
 .form {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
   justify-content: center;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
 }
 
 input {
-  padding: 0.6rem 0.9rem;
-  font-size: 1rem;
-  border: 1px solid #aaa;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  flex: 1 1 220px;
-  color: #333;
-  background-color: #fdfdfd;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  flex: 1 1 200px;
+  transition: border 0.3s;
 }
 
 input:focus {
   border-color: #4a90e2;
-  box-shadow: 0 0 3px rgba(74, 144, 226, 0.5);
   outline: none;
 }
 
 button {
-  font-size: 1rem;
   background-color: #4a90e2;
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 6px;
-  padding: 0.6rem 1.1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background 0.3s;
 }
 
 button:hover {
-  background-color: #2f6fc1;
+  background-color: #357ab8;
 }
 
 .message {
   text-align: center;
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: bold;
   margin-bottom: 1rem;
 }
 
@@ -149,14 +140,13 @@ button:hover {
 }
 
 .music-list li {
-  background-color: #f6f6f6;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 0.8rem 1rem;
-  margin-bottom: 0.6rem;
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  font-size: 0.95rem;
+  gap: 0.2rem;
 }
 </style>

@@ -18,6 +18,11 @@ const filteredItems = computed(() =>
 // Jeden ID wybranego elementu (głos)
 const votedId = ref<number | null>(null)
 
+function undoVote(){
+  localStorage.removeItem('votedId')
+  votedId.value = null
+}
+
 
 function toggleVote(id: number) {
   const saved = localStorage.getItem('votedId')
@@ -44,6 +49,32 @@ function toggleVote(id: number) {
 
 
 
+const items = ref<any[]>([])
+// const searchQuery = ref('')
+
+// const filteredItems = computed(() =>
+//   items.value.filter(item => {
+//     const q = searchQuery.value.toLowerCase()
+//     return (
+//       (item.title && item.title.toLowerCase().startsWith(q)) ||
+//       (item.artist && item.artist.toLowerCase().startsWith(q))
+//     )
+//   })
+// )
+
+// const loadThings = () => {
+//   const baseURL = import.meta.env.VITE_BACKEND_BASE_URL
+//   const endpoint = baseURL + '/music'
+//
+//   fetch(endpoint)
+//     .then(res => res.json())
+//     .then(result => {
+//       items.value = result
+//     })
+//     .catch(error => console.log('Fetch error:', error))
+// }
+
+
 onMounted(() => {
   store.loadMusic()
   const saved = localStorage.getItem('votedId')
@@ -53,6 +84,13 @@ onMounted(() => {
 
 
 <template>
+  <button
+    class="clear-button"
+    @click="undoVote"
+    v-if="votedId === null"
+  >
+    🔄 Reset My Vote
+  </button>
 
   <div class="music-container">
     <h2>🎵 Music List from Backend</h2>
@@ -90,7 +128,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 .music-container {
   max-width: 700px;
   margin: 2rem auto;
