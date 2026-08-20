@@ -9,8 +9,8 @@ describe('POST.vue', () => {
 
   it('renders input fields and a save button', () => {
     const wrapper = mount(POST)
-    expect(wrapper.find('input[placeholder="Title"]').exists()).toBe(true)
-    expect(wrapper.find('input[placeholder="Artist"]').exists()).toBe(true)
+    expect(wrapper.find('input[placeholder="Song Title"]').exists()).toBe(true)
+    expect(wrapper.find('input[placeholder="Artist Name"]').exists()).toBe(true)
     expect(wrapper.find('button').text()).toContain('Save')
   })
 
@@ -30,8 +30,8 @@ describe('POST.vue', () => {
     const wrapper = mount(POST)
 
     // Fill form
-    await wrapper.find('input[placeholder="Title"]').setValue('Test Song')
-    await wrapper.find('input[placeholder="Artist"]').setValue('Test Artist')
+    await wrapper.find('input[placeholder="Song Title"]').setValue('Test Song')
+    await wrapper.find('input[placeholder="Artist Name"]').setValue('Test Artist')
 
     // Submit
     await wrapper.find('button').trigger('click')

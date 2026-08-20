@@ -87,7 +87,7 @@ onMounted(() => {
   <button
     class="clear-button"
     @click="undoVote"
-    v-if="votedId === null"
+    v-if="votedId !== null"
   >
     🔄 Reset My Vote
   </button>

@@ -2,7 +2,9 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { useMusicStore } from '@/stores/useMusicStore'
 
-defineProps<{ msg: string }>()
+withDefaults(defineProps<{ msg?: string }>(), {
+  msg: '🏆 Basszeit Top Song',
+})
 
 const store = useMusicStore()
 const topSongVideoId = ref<string | null>(null)
@@ -47,8 +49,13 @@ async function fetchYouTubeVideoId(query: string): Promise<string | null> {
 watch(topSong, async (song) => {
   if (song) {
     const query = `${song.title} ${song.artist}`
-    const videoId = await fetchYouTubeVideoId(query)
-    topSongVideoId.value = videoId
+    try {
+      const videoId = await fetchYouTubeVideoId(query)
+      topSongVideoId.value = videoId
+    } catch (err) {
+      console.error('YouTube lookup failed:', err)
+      topSongVideoId.value = null
+    }
   }
 })
 </script>
